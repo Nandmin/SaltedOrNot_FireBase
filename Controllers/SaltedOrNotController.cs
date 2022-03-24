@@ -1,6 +1,8 @@
 ﻿using FireSharp.Config;
 using FireSharp.Interfaces;
 using FireSharp.Response;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using SaltedOrNot_FireBase.Models;
 using System;
 using System.Collections.Generic;
@@ -25,7 +27,18 @@ namespace SaltedOrNot_FireBase.Controllers
         // GET: SaltedOrNot
         public ActionResult Index()
         {
-            return View();
+            client = new FireSharp.FirebaseClient(config);
+            FirebaseResponse response = client.Get("SaltedOrNot");
+            dynamic data = JsonConvert.DeserializeObject<dynamic>(response.Body);
+            var list = new List<Ingredients>();
+            
+            foreach (var item in data)
+            {
+                list.Add(JsonConvert.DeserializeObject<Ingredients>(((JProperty)item).Value.ToString()));
+
+            }
+            
+            return View(list);
         }
 
         //[HttpGet]
