@@ -31,13 +31,13 @@ namespace SaltedOrNot_FireBase.Controllers
             FirebaseResponse response = client.Get("SaltedOrNot");
             dynamic data = JsonConvert.DeserializeObject<dynamic>(response.Body);
             var list = new List<Ingredients>();
-            
+
             foreach (var item in data)
             {
                 list.Add(JsonConvert.DeserializeObject<Ingredients>(((JProperty)item).Value.ToString()));
 
             }
-            
+
             return View(list);
         }
 
@@ -70,6 +70,44 @@ namespace SaltedOrNot_FireBase.Controllers
             PushResponse response = client.Push("SaltedOrNot/", data);
             data.ID = response.Result.name;
             SetResponse setResponse = client.Set("SaltedOrNot/" + data.ID, data);
+        }
+
+        [HttpGet]
+        public ActionResult Detail(string id)
+        {
+            client = new FireSharp.FirebaseClient(config);
+            FirebaseResponse response = client.Get("SaltedOrNot/" + id);
+            dynamic data = JsonConvert.DeserializeObject<dynamic>(response.Body);
+
+            return View(data);
+        }
+
+        [HttpGet]
+        public ActionResult Edit(string id)
+        {
+            client = new FireSharp.FirebaseClient(config);
+            FirebaseResponse response = client.Get("SaltedOrNot/" + id);
+            dynamic data = JsonConvert.DeserializeObject<dynamic>(response.Body);
+
+            return View(data);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Ingredients ingredients)
+        {
+            client = new FireSharp.FirebaseClient(config);
+            SetResponse response = client.Set("SaltedOrNot/" + ingredients.ID, ingredients);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpDelete]
+        public ActionResult Delete(string id)
+        {
+            client = new FireSharp.FirebaseClient(config);
+            FirebaseResponse response = client.Delete("SaltedOrNot/" + id);
+
+            return RedirectToAction("Index");
         }
     }
 }

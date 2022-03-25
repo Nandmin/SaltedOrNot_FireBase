@@ -185,6 +185,9 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\SaltedOrNot\Create.cshtml" />
     <Content Include="Views\SaltedOrNot\Index.cshtml" />
+    <Content Include="Views\SaltedOrNot\Detail.cshtml" />
+    <Content Include="Views\SaltedOrNot\Edit.cshtml" />
+    <Content Include="Views\SaltedOrNot\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
