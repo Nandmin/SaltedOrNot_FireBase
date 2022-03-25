@@ -41,13 +41,13 @@ namespace SaltedOrNot_FireBase.Controllers
             return View(list);
         }
 
-        //[HttpGet]
-        //public ActionResult Create()
-        //{
-        //    return View();
-        //}
-
         [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
         public ActionResult Create(Ingredients ingredients)
         {
             try
@@ -77,7 +77,7 @@ namespace SaltedOrNot_FireBase.Controllers
         {
             client = new FireSharp.FirebaseClient(config);
             FirebaseResponse response = client.Get("SaltedOrNot/" + id);
-            dynamic data = JsonConvert.DeserializeObject<dynamic>(response.Body);
+            dynamic data = JsonConvert.DeserializeObject<Ingredients>(response.Body);
 
             return View(data);
         }
@@ -87,7 +87,7 @@ namespace SaltedOrNot_FireBase.Controllers
         {
             client = new FireSharp.FirebaseClient(config);
             FirebaseResponse response = client.Get("SaltedOrNot/" + id);
-            dynamic data = JsonConvert.DeserializeObject<dynamic>(response.Body);
+            dynamic data = JsonConvert.DeserializeObject<Ingredients>(response.Body);
 
             return View(data);
         }

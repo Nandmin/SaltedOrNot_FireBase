@@ -12,11 +12,11 @@ namespace SaltedOrNot_FireBase.Models
         public int Quantity { get; set; }
         public int Energy { get; set; }
         public int Kcal { get; set; }
-        public double Fat { get; set; }
-        public double FullFat { get; set; }
-        public double Carbohydrate { get; set; }
-        public double Sugar { get; set; }
-        public double Protein { get; set; }
-        public double Salt { get; set; }
+        public float Fat { get; set; }
+        public float FullFat { get; set; }
+        public float Carbohydrate { get; set; }
+        public float Sugar { get; set; }
+        public float Protein { get; set; }
+        public float Salt { get; set; }
     }
 }
